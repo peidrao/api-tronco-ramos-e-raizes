@@ -3,7 +3,7 @@ import UserRepository from '../repositories/UserRepository'
 import CreateUserService from '../services/User/CreateUserService'
 
 export default class UserController {
-  public async create (request: Request, response: Response): Promise<Response> {
+  public async create(request: Request, response: Response): Promise<Response> {
     const { name, email, password } = request.body
 
     const userRepository = new UserRepository()

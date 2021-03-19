@@ -19,7 +19,8 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
-    "camelcase": "off"
+    "camelcase": "off",
+    "space-before-function-paren": "off"
   },
   "settings": {
     "import/resolver": {
