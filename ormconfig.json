@@ -1,10 +1,10 @@
 {
-   "type": "postgres",
+   "type": "mysql",
    "host": "localhost",
-   "port": 5432,
-   "username": "postgres",
-   "password": "postgres",
-   "database": "postgres",
+   "port": 3306,
+   "username": "museu-trr",
+   "password": "@museu2021",
+   "database": "db",
    "entities": [
     "./src/models/*.ts"
    ],
