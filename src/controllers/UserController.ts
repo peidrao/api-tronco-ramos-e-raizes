@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import UserRepository from '../repositories/UserRepository/UserRepository'
 import CreateUserService from '../services/UserService/CreateUserService'
 import DeleteUserService from '../services/UserService/DeleteUserService'
+import EnableSuperUserService from '../services/UserService/EnableSuperUserService'
 import UpdateUserService from '../services/UserService/UpdateUserService'
 
 export default class UserController {
@@ -51,5 +52,18 @@ export default class UserController {
     await deleteUserService.execute(id)
 
     return response.status(204).send()
+  }
+
+  public async enableIsSuper(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params
+
+    const userRepository = new UserRepository()
+    const enableSuperUser = new EnableSuperUserService(userRepository)
+
+    const user = await enableSuperUser.execute({ id })
+
+    // delete user.password
+
+    return response.json(user)
   }
 }

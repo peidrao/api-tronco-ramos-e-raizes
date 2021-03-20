@@ -9,5 +9,6 @@ userRoutes.post('/', userController.create)
 userRoutes.get('/', userController.index)
 userRoutes.put('/:id', userController.update)
 userRoutes.delete('/:id', userController.destroy)
+userRoutes.patch('/:id', userController.enableIsSuper)
 
 export default userRoutes
