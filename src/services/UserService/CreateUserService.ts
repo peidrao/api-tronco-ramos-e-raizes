@@ -17,7 +17,7 @@ export default class CreateUserService {
     this.userRepository = userRepository
   }
 
-  public async execute ({ name, email, password }: IRequest): Promise<User> {
+  public async execute({ name, email, password }: IRequest): Promise<User> {
     const userEmail = await this.userRepository.findByEmail(email)
 
     if (userEmail) {

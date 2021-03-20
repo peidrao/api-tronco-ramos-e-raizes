@@ -1,11 +1,14 @@
 import { Router } from 'express'
 
 import UserController from '../controllers/UserController'
+import auth from '../middlewares/auth'
 
 const userRoutes = Router()
 const userController = new UserController()
 
-userRoutes.post('/', userController.create)
+userRoutes.use(auth)
+
+userRoutes.post('/:id', userController.create)
 userRoutes.get('/', userController.index)
 userRoutes.put('/:id', userController.update)
 userRoutes.delete('/:id', userController.destroy)
