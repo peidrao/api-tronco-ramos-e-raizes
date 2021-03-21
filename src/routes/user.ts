@@ -12,8 +12,8 @@ userRoutes.use(authenticate)
 userRoutes.post('/', isSuper, userController.create)
 
 userRoutes.get('/', userController.index)
-userRoutes.put('/:id', userController.update)
-userRoutes.delete('/:id', userController.destroy)
-userRoutes.patch('/:id', userController.enableIsSuper)
+userRoutes.put('/:id', isSuper, userController.update)
+userRoutes.delete('/:id', isSuper, userController.destroy)
+userRoutes.patch('/:id', isSuper, userController.enableIsSuper)
 
 export default userRoutes

@@ -23,6 +23,10 @@ export default class CreateUserService {
       throw new AppError('Email já cadastrado no sistema!', 404)
     }
 
+    if (password.length <= 5) {
+      throw new AppError('Senha curta demais', 400)
+    }
+
     const passwordHash = await hash(password, 8)
     const user = await this.userRepository.create({ name, email, password: passwordHash })
 
