@@ -2,11 +2,18 @@ import { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
 import AppError from '../errors/AppError'
 
+interface TokenPayload {
+  iat: number;
+  exp: number;
+  sub: string;
+  isSuper: boolean;
+}
+
 const authenticate = (
   request: Request,
   response: Response,
   next: NextFunction
-): Promise<any> | void => {
+): void => {
   const authHeader = request.headers.authorization
 
   if (!authHeader) {
@@ -16,8 +23,16 @@ const authenticate = (
   const [, token] = authHeader.split(' ')
 
   try {
-    verify(token, String(process.env.APP_SECRET))
-    next()
+    const decoded = verify(token, String(process.env.APP_SECRET)) as TokenPayload
+
+    const { sub, isSuper } = decoded
+
+    request.user = {
+      id: sub,
+      isSuper
+    }
+
+    return next()
   } catch {
     throw new AppError('Token JWt é inválido', 401)
   }

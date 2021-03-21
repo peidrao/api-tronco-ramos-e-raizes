@@ -9,7 +9,6 @@ interface IRequest {
   email: string
   password: string
 }
-
 export default class CreateUserService {
   private userRepository: IUsersRepository
 

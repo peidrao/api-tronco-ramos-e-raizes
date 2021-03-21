@@ -33,7 +33,8 @@ export default class LoginSessionService {
       throw new AppError('Senha inválida', 401)
     }
 
-    const token = sign({}, process.env.APP_SECRET as string, {
+    const token = sign({ isSuper: user.isSuper }, process.env.APP_SECRET as string, {
+      subject: user.id,
       expiresIn: '1d'
     })
 
