@@ -11,5 +11,7 @@ videosRoutes.use(authenticate)
 
 videosRoutes.post('/', videoController.create)
 videosRoutes.get('/', videoController.index)
+videosRoutes.put('/:id', videoController.update)
+videosRoutes.delete('/:id', videoController.destroy)
 
 export default videosRoutes
