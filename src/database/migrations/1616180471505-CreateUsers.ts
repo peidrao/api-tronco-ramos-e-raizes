@@ -27,8 +27,8 @@ export class CreateUsers1616180471505 implements MigrationInterface {
           },
           {
             name: 'isSuper',
-            type: 'boolean',
-            default: false
+            type: 'boolean'
+            // default: false
           },
           { name: 'created_at', type: 'timestamp', default: 'now()' },
           { name: 'updated_at', type: 'timestamp', default: 'now()' }

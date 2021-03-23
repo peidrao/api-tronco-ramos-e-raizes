@@ -10,6 +10,10 @@ export default class VideoRepository implements IVideosRepository {
     this.ormRepository = getRepository(Video)
   }
 
+  public findByLink(link: string): Promise<Video | undefined> {
+    return this.ormRepository.findOne(link)
+  }
+
   public async findById(id: string): Promise<Video | undefined> {
     const videoId = await this.ormRepository.findOne(id, {
       relations: ['user']
@@ -33,7 +37,7 @@ export default class VideoRepository implements IVideosRepository {
   }
 
   public async delete(id: string): Promise<void> {
-    this.ormRepository.delete(id)
+    await this.ormRepository.delete(id)
   }
 
   save(video: Video): Promise<Video> {

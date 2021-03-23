@@ -5,7 +5,6 @@
    "username": "museu-trr",
    "password": "@museu2021",
    "database": "db",
-   "synchronize": true,
    "entities": [
     "./src/models/*.ts"
    ],

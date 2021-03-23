@@ -29,11 +29,16 @@ export default class CreateVideoService {
     description,
     link
   }: IRequest): Promise<Video> {
-    const verifyClient = await this.userRepository.findById(user_id)
-
-    if (!verifyClient) {
-      throw new AppError('Client não encontrado', 400)
+    const userExists = await this.userRepository.findById(user_id)
+    if (!userExists) {
+      throw new AppError('Usuário não encontrado', 400)
     }
+    /* Não aparece a mensagem de status  */
+    const linkExists = await this.videoRepository.findByLink(link)
+    if (linkExists) {
+      throw new AppError('Já existe um vídeo com esse link', 301)
+    }
+
     const project = await this.videoRepository.create({
       title,
       user_id,

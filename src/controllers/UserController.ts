@@ -14,12 +14,12 @@ export default class UserController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, email, password } = request.body
+    const { name, email, password, isSuper } = request.body
 
     const userRepository = new UserRepository()
     const createUserService = new CreateUserService(userRepository)
 
-    const user = await createUserService.execute({ name, email, password })
+    const user = await createUserService.execute({ name, email, password, isSuper })
 
     // delete user.password
 

@@ -7,6 +7,7 @@ const isSuperUser = (
   next: NextFunction
 ): void => {
   if (request.user.isSuper) {
+    console.log(request.user.isSuper)
     return next()
   }
   throw new AppError('Sem autorização', 401)

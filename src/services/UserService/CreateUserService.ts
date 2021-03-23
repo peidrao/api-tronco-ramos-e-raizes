@@ -8,6 +8,7 @@ interface IRequest {
   name: string
   email: string
   password: string
+  isSuper: boolean
 }
 export default class CreateUserService {
   private userRepository: IUsersRepository
@@ -16,7 +17,7 @@ export default class CreateUserService {
     this.userRepository = userRepository
   }
 
-  public async execute({ name, email, password }: IRequest): Promise<User> {
+  public async execute({ name, email, password, isSuper }: IRequest): Promise<User> {
     const userEmail = await this.userRepository.findByEmail(email)
 
     if (userEmail) {
@@ -28,7 +29,7 @@ export default class CreateUserService {
     }
 
     const passwordHash = await hash(password, 8)
-    const user = await this.userRepository.create({ name, email, password: passwordHash })
+    const user = await this.userRepository.create({ name, email, isSuper, password: passwordHash })
 
     return user
   }

@@ -10,5 +10,6 @@ const videoController = new VideoController()
 videosRoutes.use(authenticate)
 
 videosRoutes.post('/', videoController.create)
+videosRoutes.get('/', videoController.index)
 
 export default videosRoutes

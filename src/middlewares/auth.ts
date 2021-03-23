@@ -26,11 +26,13 @@ const authenticate = (
     const decoded = verify(token, String(process.env.APP_SECRET)) as TokenPayload
 
     const { sub, isSuper } = decoded
+    console.log(decoded)
 
     request.user = {
       id: sub,
       isSuper
     }
+    // console.log(isSuper)
 
     return next()
   } catch {
