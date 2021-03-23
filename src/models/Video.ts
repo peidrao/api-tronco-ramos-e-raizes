@@ -3,7 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
@@ -26,9 +26,9 @@ export default class Video {
   @Column()
   user_id: string;
 
-  @ManyToMany(() => User)
+  @ManyToOne(() => User, user => user, { eager: true })
   @JoinColumn({ name: 'user_id' })
-  user: string
+  user: User
 
   @CreateDateColumn()
   created_at: Date;

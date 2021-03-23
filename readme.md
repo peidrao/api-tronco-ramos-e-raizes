@@ -1,19 +1,7 @@
-# Museu TRR
-
 ```
-❯ yarn typeorm migration:run
-yarn run v1.22.10
-$ ts-node-dev ./node_modules/typeorm/cli.js migration:run
-[INFO] 10:25:24 ts-node-dev ver. 1.1.6 (using ts-node ver. 9.1.1, typescript ver. 3.9.6)
-query: SELECT * FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = 'db' AND `TABLE_NAME` = 'migrations'
-query: SELECT * FROM `db`.`migrations` `migrations`  ORDER BY `id` DESC
-1 migrations are already loaded in the database.
-2 migrations were found in the source code.
-CreateUsers1616180471505 is the last executed migration. It was executed on Fri Mar 19 2021 16:01:11 GMT-0300 (Brasilia Standard Time).
-1 migrations are new migrations that needs to be executed.
-query: START TRANSACTION
-query: CREATE TABLE `videos` (`id` varchar(36) NOT NULL, `user_id` varchar(36) NOT NULL, `title` varchar(255) NOT NULL, `link` varchar(255) NOT NULL, `description` text NOT NULL, `created_at` timestamp NOT NULL DEFAULT now(), `updated_at` timestamp NOT NULL DEFAULT now(), CONSTRAINT `VideosByUsers` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE, PRIMARY KEY (`id`)) ENGINE=InnoDB
-query failed: CREATE TABLE `videos` (`id` varchar(36) NOT NULL, `user_id` varchar(36) NOT NULL, `title` varchar(255) NOT NULL, `link` varchar(255) NOT NULL, `description` text NOT NULL, `created_at` timestamp NOT NULL DEFAULT now(), `updated_at` timestamp NOT NULL DEFAULT now(), CONSTRAINT `VideosByUsers` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE, PRIMARY KEY (`id`)) ENGINE=InnoDB
+query: SELECT VERSION() AS `version`
+query: ALTER TABLE `videos` ADD CONSTRAINT `VideoUser` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE SET NULL
+query failed: ALTER TABLE `videos` ADD CONSTRAINT `VideoUser` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE SET NULL
 error: Error: ER_CANNOT_ADD_FOREIGN: Cannot add foreign key constraint
     at Query.Sequence._packetToError (/home/peidrao/Repos/museu-trr-api/node_modules/mysql/lib/protocol/sequences/Sequence.js:47:14)
     at Query.ErrorPacket (/home/peidrao/Repos/museu-trr-api/node_modules/mysql/lib/protocol/sequences/Query.js:79:18)
@@ -38,7 +26,7 @@ error: Error: ER_CANNOT_ADD_FOREIGN: Cannot add foreign key constraint
   sqlMessage: 'Cannot add foreign key constraint',
   sqlState: 'HY000',
   index: 0,
-  sql: 'CREATE TABLE `videos` (`id` varchar(36) NOT NULL, `user_id` varchar(36) NOT NULL, `title` varchar(255) NOT NULL, `link` varchar(255) NOT NULL, `description` text NOT NULL, `created_at` timestamp NOT NULL DEFAULT now(), `updated_at` timestamp NOT NULL DEFAULT now(), CONSTRAINT `VideosByUsers` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE, PRIMARY KEY (`id`)) ENGINE=InnoDB'
+  sql: 'ALTER TABLE `videos` ADD CONSTRAINT `VideoUser` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE SET NULL'
 }
 query: ROLLBACK
 Error during migration run:
@@ -58,11 +46,10 @@ QueryFailedError: ER_CANNOT_ADD_FOREIGN: Cannot add foreign key constraint
   sqlMessage: 'Cannot add foreign key constraint',
   sqlState: 'HY000',
   index: 0,
-  sql: 'CREATE TABLE `videos` (`id` varchar(36) NOT NULL, `user_id` varchar(36) NOT NULL, `title` varchar(255) NOT NULL, `link` varchar(255) NOT NULL, `description` text NOT NULL, `created_at` timestamp NOT NULL DEFAULT now(), `updated_at` timestamp NOT NULL DEFAULT now(), CONSTRAINT `VideosByUsers` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE, PRIMARY KEY (`id`)) ENGINE=InnoDB',
-  query: 'CREATE TABLE `videos` (`id` varchar(36) NOT NULL, `user_id` varchar(36) NOT NULL, `title` varchar(255) NOT NULL, `link` varchar(255) NOT NULL, `description` text NOT NULL, `created_at` timestamp NOT NULL DEFAULT now(), `updated_at` timestamp NOT NULL DEFAULT now(), CONSTRAINT `VideosByUsers` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+  sql: 'ALTER TABLE `videos` ADD CONSTRAINT `VideoUser` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE SET NULL',
+  query: 'ALTER TABLE `videos` ADD CONSTRAINT `VideoUser` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE SET NULL',
   parameters: []
 }
 error Command failed with exit code 1.
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
-
 ```
