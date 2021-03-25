@@ -19,13 +19,29 @@ export default class DocumentRepository implements IDocumentRepository {
     return this.ormRepository.find({ where: { user_id: id } })
   }
 
-  public async create({ title, author, document, user_id }: CreateDocumentDTO): Promise<Document> {
-    const createDocument = this.ormRepository.create({ title, author, document, user_id })
-    const doc = await this.ormRepository.save(createDocument)
+  public async create({
+    document,
+    author,
+    title,
+    user_id
+  }: CreateDocumentDTO): Promise<Document> {
+    const createdDocument = this.ormRepository.create({
+      document,
+      title,
+      author,
+      user_id
+    })
+    const doc = await this.ormRepository.save(createdDocument)
     return doc
   }
 
-  public update({ id, title, author, document, user_id }: Document): Promise<Document> {
+  public update({
+    id,
+    title,
+    author,
+    document,
+    user_id
+  }: Document): Promise<Document> {
     return this.ormRepository.save({ id, title, author, document, user_id })
   }
 

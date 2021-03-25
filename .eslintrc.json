@@ -20,7 +20,8 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "camelcase": "off",
-    "space-before-function-paren": "off"
+    "space-before-function-paren": "off",
+    "no-useless-constructor": "off"
   },
   "settings": {
     "import/resolver": {
