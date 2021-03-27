@@ -6,7 +6,8 @@ const tmp = path.resolve(__dirname, '..', '..', 'tmp')
 
 const folders = {
   temp: tmp,
-  document: path.resolve(tmp, 'documents')
+  document: path.resolve(tmp, 'documents'),
+  audio: path.resolve(tmp, 'audios')
 }
 
 export default {

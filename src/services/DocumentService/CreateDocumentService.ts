@@ -1,4 +1,3 @@
-import { container } from 'tsyringe'
 import AppError from '../../errors/AppError'
 import Document from '../../models/Document'
 import IDocumentRepository from '../../repositories/DocumentRepository/interfaces/IDocumentRepository'
