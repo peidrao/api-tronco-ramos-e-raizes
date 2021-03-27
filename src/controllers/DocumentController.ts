@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import DocumentRepository from '../repositories/DocumentRepository/DocumentRepository'
 import UserRepository from '../repositories/UserRepository/UserRepository'
 import CreateDocumentService from '../services/DocumentService/CreateDocumentService'
+import DeleteDocumentService from '../services/DocumentService/DeleteDocumentService'
 import UpdateDocumentService from '../services/DocumentService/UpdateDocumentService'
 import Storage from '../utils/storage/Storage'
 
@@ -57,5 +58,19 @@ export default class DocumentController {
     })
 
     return response.json(doc)
+  }
+
+  public async destroy(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params
+
+    const documentRepository = new DocumentRepository()
+    const userRepository = new UserRepository()
+    const deleteDocumentService = new DeleteDocumentService(
+      documentRepository,
+      userRepository
+    )
+    await deleteDocumentService.execute({ id, user_id: request.user.id })
+
+    return response.send()
   }
 }

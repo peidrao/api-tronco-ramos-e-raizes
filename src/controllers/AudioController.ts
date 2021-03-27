@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import AudioRepository from '../repositories/AudioRepository/AudioRepository'
 import UserRepository from '../repositories/UserRepository/UserRepository'
 import CreateAudioService from '../services/AudioService/CreateAudioService'
+import DeleteAudioService from '../services/AudioService/DeleteAudioService'
 import UpdateAudioService from '../services/AudioService/UpdateAudioService'
 import Storage from '../utils/storage/Storage'
 
@@ -55,5 +56,19 @@ export default class AudioController {
     })
 
     return response.json(_audio)
+  }
+
+  public async destroy(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params
+
+    const audioRepository = new AudioRepository()
+    const userRepository = new UserRepository()
+    const deleteAudioService = new DeleteAudioService(
+      audioRepository,
+      userRepository
+    )
+    await deleteAudioService.execute({ id, user_id: request.user.id })
+
+    return response.send()
   }
 }
