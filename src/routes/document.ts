@@ -12,5 +12,6 @@ const uploadFile = multer(upload)
 documentRoutes.use(authenticate)
 documentRoutes.post('/upload', uploadFile.single('file'), documentController.upload)
 documentRoutes.post('/', documentController.create)
+documentRoutes.put('/:id', documentController.update)
 
 export default documentRoutes
