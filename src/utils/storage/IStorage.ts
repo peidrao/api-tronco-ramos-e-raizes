@@ -1,4 +1,4 @@
-export type TFileType = | 'temp' | 'document'
+export type TFileType = | 'temp' | 'document' | 'audio'
 
 export default interface IStorage {
   saveFile(file: string, fileType: TFileType): Promise<string>;
