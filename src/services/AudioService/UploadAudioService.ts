@@ -7,7 +7,6 @@ export default class UploadAudioService {
   }
 
   public async execute(file: string): Promise<void> {
-    console.log('audio')
     this.storage.saveFile(file, 'audio')
   }
 }
