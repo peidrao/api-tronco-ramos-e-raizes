@@ -5,7 +5,7 @@ import Audio from '../../models/Audio'
 import CreateAudioDTO from '../../dtos/CreateAudioDTO'
 
 export default class AudioRepository implements IAudioRepository {
-  private ormRepository: Repository<Audio>
+  private ormRepository: Repository<Audio>;
 
   constructor() {
     this.ormRepository = getRepository(Audio)
@@ -19,9 +19,23 @@ export default class AudioRepository implements IAudioRepository {
     return this.ormRepository.find({ where: { user_id: id } })
   }
 
-  public async create({ title, author, audio, user_id }: CreateAudioDTO): Promise<Audio> {
-    const createAudio = this.ormRepository.create({ title, author, audio, user_id })
-    const _audio = await this.ormRepository.create(createAudio)
+  public findById(id: string): Promise<Audio | undefined> {
+    return this.ormRepository.findOne(id)
+  }
+
+  public async create({
+    title,
+    author,
+    audio,
+    user_id
+  }: CreateAudioDTO): Promise<Audio> {
+    const createAudio = this.ormRepository.create({
+      title,
+      author,
+      audio,
+      user_id
+    })
+    const _audio = await this.ormRepository.save(createAudio)
     return _audio
   }
 

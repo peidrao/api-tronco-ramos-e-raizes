@@ -13,5 +13,6 @@ audioRoutes.use(authenticate)
 
 audioRoutes.post('/upload', uploadFile.single('file'), audioController.upload)
 audioRoutes.post('/', audioController.create)
+audioRoutes.put('/:id', audioController.update)
 
 export default audioRoutes

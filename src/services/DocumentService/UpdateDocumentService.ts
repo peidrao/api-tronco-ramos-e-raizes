@@ -13,7 +13,7 @@ interface IRequest {
   user_id: string
 }
 
-class UpdateDocumentService {
+export default class UpdateDocumentService {
   private documentRepository: IDocumentRepository
   private userRepository: IUsersRepository
 
@@ -59,4 +59,3 @@ class UpdateDocumentService {
     }
   }
 }
-export default UpdateDocumentService
