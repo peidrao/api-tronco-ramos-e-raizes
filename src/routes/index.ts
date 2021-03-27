@@ -5,6 +5,7 @@ import videoRoutes from './video'
 import documentRoutes from './document'
 import multer from 'multer'
 import uploadConfig from '../config/upload'
+import imageRouters from './image'
 // import authenticate from '../middlewares/auth'
 
 const prefix = '/api/v1'
@@ -22,5 +23,6 @@ routes.use(`${prefix}/users`, userRoutes)
 routes.use(`${prefix}/session`, sessionRoutes)
 routes.use(`${prefix}/video`, videoRoutes)
 routes.use(`${prefix}/document`, documentRoutes)
+routes.use(imageRouters)
 
 export default routes
