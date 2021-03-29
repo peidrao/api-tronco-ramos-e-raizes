@@ -14,6 +14,6 @@ routes.use(`${prefix}/session`, sessionRoutes)
 routes.use(`${prefix}/video`, videoRoutes)
 routes.use(`${prefix}/document`, documentRoutes)
 routes.use(`${prefix}/audio`, audioRoutes)
-routes.use(imageRouters)
+routes.use(`${prefix}/image`, imageRouters)
 
 export default routes

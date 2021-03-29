@@ -3,6 +3,6 @@ import { join } from 'path'
 
 const imageRouters = Router()
 
-imageRouters.use('/images', staticFiles(join(__dirname, '..', '..', 'tmp', 'images')))
+imageRouters.use(staticFiles(join(__dirname, '..', '..', 'tmp', 'images')))
 
 export default imageRouters
