@@ -19,6 +19,10 @@ export default class DocumentRepository implements IDocumentRepository {
     return this.ormRepository.find({ where: { user_id: id } })
   }
 
+  public findById(id: string): Promise<Document | undefined> {
+    return this.ormRepository.findOne(id)
+  }
+
   public async create({
     document,
     author,

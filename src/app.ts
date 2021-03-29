@@ -8,7 +8,7 @@ import AppError from './errors/AppError'
 
 const app = express()
 
-app.use(express.json({ limit: '2mb' }))
+app.use(express.json({ limit: '5mb' }))
 app.use('/files', express.static(uploadConfig.folders.temp))
 app.use(routes)
 
