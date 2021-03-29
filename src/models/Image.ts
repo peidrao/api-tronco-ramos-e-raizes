@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import Album from './Album'
 
 @Entity('images')
 export default class Image {
@@ -10,4 +11,7 @@ export default class Image {
 
   @Column()
   name: string
+
+  @ManyToOne(type => Album, album => album.images)
+  album: Album
 }
