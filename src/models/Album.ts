@@ -1,5 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 import Image from './Image'
+import User from './User'
 
 @Entity('albums')
 export default class Album {
@@ -12,6 +13,17 @@ export default class Album {
   @Column()
   description: string
 
-  @OneToMany(type => Image, image => image.album)
+  @OneToMany(() => Image, image => image.album)
+  @JoinColumn({ name: 'image_id' })
   images: Image[]
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user_id: User
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

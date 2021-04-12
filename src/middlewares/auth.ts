@@ -36,7 +36,7 @@ const authenticate = (
 
     return next()
   } catch {
-    throw new AppError('Token JWt é inválido', 401)
+    throw new AppError('Token JWT é inválido', 401)
   }
 }
 
