@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import ImageRepository from '../repositories/ImageRepository/ImageRepository'
 import UserRepository from '../repositories/UserRepository/UserRepository'
 import CreateImageService from '../services/ImageService/CreateImageService'
+import DeleteImageService from '../services/ImageService/DeleteImageService'
 import UpdateImageService from '../services/ImageService/UpdateImageService'
 import Storage from '../utils/storage/Storage'
 
@@ -55,5 +56,21 @@ export default class ImageController {
     })
 
     return response.json(_image)
+  }
+
+  public async destroy(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params
+
+    const imageRepository = new ImageRepository()
+    const userRepository = new UserRepository()
+    const deleteImageService = new DeleteImageService(
+      imageRepository,
+      userRepository
+    )
+
+    const user_id = request.user.id
+    await deleteImageService.execute({ id, user_id })
+
+    return response.send()
   }
 }

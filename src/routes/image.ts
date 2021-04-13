@@ -16,5 +16,6 @@ imageRouters.use(staticFiles(join(__dirname, '..', '..', 'tmp', 'images')))
 imageRouters.post('/upload', uploadFile.single('file'), imageController.upload)
 imageRouters.post('/create', imageController.create)
 imageRouters.put('/:id', imageController.update)
+imageRouters.delete('/:id', imageController.destroy)
 
 export default imageRouters
