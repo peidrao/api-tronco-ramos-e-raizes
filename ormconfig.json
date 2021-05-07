@@ -2,9 +2,9 @@
   "type": "mysql",
   "host": "localhost",
   "port": 3306,
-  "username": "museu-trr",
-  "password": "@museu2021",
-  "database": "db",
+  "username": "teste",
+  "password": "teste",
+  "database": "teste",
   "entities": [
     "./src/models/*.ts"
   ],
