@@ -1,8 +1,0 @@
-node_modules
-*.lock
-package-lock.json
-
-.env
-*.pdf
-*.mp3
-tmp/images
