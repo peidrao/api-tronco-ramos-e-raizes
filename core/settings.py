@@ -32,7 +32,8 @@ INSTALLED_APPS = [
 
      'rest_framework',
 
-    'document'
+    'document',
+    'video',
 
 ]
 

@@ -9,7 +9,12 @@ from .serializers import DocumentSerializer
 class DocumentView(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
-    def post(self, request, *args, **kwargs):
+
+    def list(self, request):
+        return Response('GET API')  
+
+
+    def post(self, request):
         document_serializer = DocumentSerializer(data=request.data)
         if document_serializer.is_valid():
             document_serializer.save()

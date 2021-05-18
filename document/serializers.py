@@ -1,7 +1,7 @@
-from rest_framework import fields, serializers
+from rest_framework import  serializers
 from .models import Document
 
 class DocumentSerializer(serializers.ModelSerializer):
-    class Meta():
+    class Meta:
         model = Document
         fields = ('file', 'title', 'created_at', 'updated_at')

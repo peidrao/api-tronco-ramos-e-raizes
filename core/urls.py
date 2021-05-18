@@ -9,6 +9,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
 
     path('document/', include('document.urls')),
+    path('video/', include('video.urls')),
 ]
 
 if settings.DEBUG:
