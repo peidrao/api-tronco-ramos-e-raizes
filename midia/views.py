@@ -1,5 +1,8 @@
+from django.db.models import query
+from url_parser import get_base_url, parse_url, get_url
+from django.contrib.auth import get_user_model
 from .models import Document, Video, Audio
-from rest_framework import viewsets
+from rest_framework import serializers, viewsets
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
@@ -31,6 +34,17 @@ class VideoViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response("Vídeo criado com sucesso", status=status.HTTP_201_CREATED, headers=headers)
 
+    def perform_create(self, serializer):
+        link_video = parse_url(serializer.validated_data.get('link_video'))
+        title = serializer.validated_data.get('title')
+        link_video_id= link_video['query']['v']
+        serializer.save(title=title, link_video=link_video_id)
+        
+        
+
+
+
+        
 
 class AudioViewSet(viewsets.ModelViewSet):
     serializer_class = AudioSerializer
