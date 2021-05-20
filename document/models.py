@@ -1,3 +1,4 @@
+from enum import unique
 from django.db import models
 
 
@@ -13,5 +14,5 @@ class Document(models.Model):
         return str(self.title)
     
     class Meta:
-        verbose_name = 'Document'
-        verbose_name_plural = 'Documents'
+        verbose_name = 'Documento'
+        verbose_name_plural = 'Documentos'
