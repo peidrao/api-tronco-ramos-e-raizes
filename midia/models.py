@@ -1,5 +1,7 @@
 from django.db import models
 from model_abs import ModelAbs
+
+from .validators import validate_file_size
 # Create your models here.
 
 class Video(ModelAbs):
@@ -15,7 +17,7 @@ class Video(ModelAbs):
 
 
 class Audio(ModelAbs):
-    file = models.FileField()
+    file = models.FileField(upload_to='audios', validators=[validate_file_size], blank=False, null=False)
     name = models.CharField(max_length=250, unique=True)
 
     def __str__(self):
@@ -27,7 +29,7 @@ class Audio(ModelAbs):
 
 
 class Document(models.Model):
-    file = models.FileField(blank=False, null=False)
+    file = models.FileField(upload_to='documents', validators=[validate_file_size], blank=False, null=False)
     title = models.CharField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
