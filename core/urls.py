@@ -7,11 +7,13 @@ from rest_framework import routers
 
 from document.views import DocumentViewSet
 from video.views import VideoViewSet
+from audio.views import AudioViewSet
 
 router = routers.DefaultRouter()
 
-router.register(r'api/v1/document', DocumentViewSet, basename='document')
-router.register(r'api/v1/video', VideoViewSet, basename='video')
+router.register(r'api/v1/documents', DocumentViewSet, basename='document')
+router.register(r'api/v1/videos', VideoViewSet, basename='video')
+router.register(r'api/v1/audios', AudioViewSet, basename='audio')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
