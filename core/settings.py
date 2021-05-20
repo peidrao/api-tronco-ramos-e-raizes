@@ -33,9 +33,7 @@ INSTALLED_APPS = [
 
      'rest_framework',
 
-    'document',
-    'video',
-    'audio'
+    'midia'
 
 ]
 
@@ -110,7 +108,7 @@ REST_FRAMEWORK = {
     ]
 }
 
-
+""" 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
@@ -139,7 +137,7 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-
+ """
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
