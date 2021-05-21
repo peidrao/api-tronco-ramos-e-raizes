@@ -20,8 +20,14 @@ class DocumentViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response("Documento criado com sucesso", status=status.HTTP_201_CREATED, headers=headers)
+        return Response("documento criado!", status=status.HTTP_201_CREATED, headers=headers)
 
+
+    def list(self, request, *args, **kwargs):
+        # ret = super(StoryViewSet, self).list(request)
+        return Response({'key': 'list value'})
+
+        
 
 class VideoViewSet(viewsets.ModelViewSet):
     serializer_class = VideoSerializer
@@ -32,7 +38,7 @@ class VideoViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response("Vídeo criado com sucesso", status=status.HTTP_201_CREATED, headers=headers)
+        return Response(serializer, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer):
         link_video = parse_url(serializer.validated_data.get('link_video'))
