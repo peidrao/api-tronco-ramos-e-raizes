@@ -1,3 +1,4 @@
+from exposure.views import ExposureViewSet
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
@@ -14,6 +15,7 @@ router.register(r'api/v1/documents', DocumentViewSet, basename='document')
 router.register(r'api/v1/videos', VideoViewSet, basename='video')
 router.register(r'api/v1/audios', AudioViewSet, basename='audio')
 router.register(r'api/v1/users', UserViewSet, basename='users')
+router.register(r'api/v1/exposures', ExposureViewSet, basename='exposure')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

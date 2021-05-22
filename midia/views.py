@@ -1,12 +1,12 @@
 from django.db.models import query
-from url_parser import get_base_url, parse_url, get_url
-from django.contrib.auth import get_user_model
+from url_parser import parse_url
 from .models import Document, Video, Audio
-from rest_framework import serializers, viewsets
+from rest_framework import  viewsets
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import DocumentSerializer, VideoSerializer, AudioSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class DocumentViewSet(viewsets.ModelViewSet):
@@ -21,12 +21,6 @@ class DocumentViewSet(viewsets.ModelViewSet):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response("documento criado!", status=status.HTTP_201_CREATED, headers=headers)
-
-
-    def list(self, request, *args, **kwargs):
-        # ret = super(StoryViewSet, self).list(request)
-        return Response({'key': 'list value'})
-
         
 
 class VideoViewSet(viewsets.ModelViewSet):
@@ -48,14 +42,11 @@ class VideoViewSet(viewsets.ModelViewSet):
         
         
 
-
-
-        
-
 class AudioViewSet(viewsets.ModelViewSet):
     serializer_class = AudioSerializer
     parser_classes = (MultiPartParser, FormParser,)
     queryset = Audio.objects.all()
+    # permission_classes = (IsAuthenticated,)
 
     def create(self, request, *args, **kwargs):
         serializer = AudioSerializer(data=request.data)
