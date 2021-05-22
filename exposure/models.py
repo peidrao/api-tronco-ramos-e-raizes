@@ -1,9 +1,9 @@
-from django.db import models
-from model_abs import ModelAbs
 from user.models import User
+from model_abs import ModelAbs
+from django.db import models
 
-# Create your models here.
-class Task(models.Model):
+
+class Task(ModelAbs):
     title = models.CharField(max_length=100, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
