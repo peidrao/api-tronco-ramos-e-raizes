@@ -1,5 +1,6 @@
 from django.db import models
-from midia.models import AlbumAudio, AlbumImage, AlbumVideo, Tag
+from midia.models import AlbumAudio, AlbumImage, AlbumVideo
+from midia.models_abs import Tag
 
 class Exposure(models.Model):
     title = models.CharField(max_length=200)

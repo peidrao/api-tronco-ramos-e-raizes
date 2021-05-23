@@ -1,12 +1,12 @@
 from django.contrib import admin
 from .models import *
+from .models_abs import Tag
+
 admin.site.register(Tag)
 
 class DocumentAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     list_display = ['__str__', 'created_at', 'updated_at']
-
-
 
 class VideoInline(admin.TabularInline):
     model = Video
@@ -35,7 +35,7 @@ class ImageInline(admin.TabularInline):
     extra = 1
 
 class AlbumImageAdmin(admin.ModelAdmin):
-    fields = ("title",)
+    list_display = ['__str__', 'created_at', 'updated_at']
     inlines = [ImageInline]
 
 

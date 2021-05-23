@@ -13,6 +13,8 @@ from exposure.views import *
 
 router = routers.DefaultRouter()
 
+router.register(r'api/v1/tags', TagViewSet, basename='tag')
+
 """ router.register(r'api/v1/documents', DocumentViewSet, basename='document')
 router.register(r'api/v1/videos', VideoViewSet, basename='video')
 # router.register(r'api/v1/audios', AudioViewSet, basename='audio')
