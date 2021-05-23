@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Document, Video, Audio
+from .models import Document, Image, Video, Audio
 
 
 class DocumentAdmin(admin.ModelAdmin):
@@ -26,6 +26,15 @@ class AudioAdmin(admin.ModelAdmin):
 
 
 
+class ImageAdmin(admin.ModelAdmin):
+    date_hierarchy = 'created_at'
+    list_display = ['__str__', 'created_at', 'updated_at']
+
+    class Meta:
+        model = Image
+
+
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Audio, AudioAdmin)
+#admin.site.register(Image, ImageAdmin)

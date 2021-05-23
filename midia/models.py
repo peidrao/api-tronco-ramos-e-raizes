@@ -1,3 +1,4 @@
+from django.db.models.fields.files import ImageField
 from user.models import User
 from django.db import models
 
@@ -20,11 +21,11 @@ class Video(ModelAbs):
 
 class Audio(ModelAbs):
     file = models.FileField(upload_to='audios', validators=[validate_file_size], blank=False, null=False)
-    name = models.CharField(max_length=250, unique=True)
+    title = models.CharField(max_length=250, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.title
     
     class Meta:
         verbose_name = 'Áudio'
@@ -42,3 +43,16 @@ class Document(ModelAbs):
     class Meta:
         verbose_name = 'Documento'
         verbose_name_plural = 'Documentos'
+
+
+class Image(ModelAbs):
+    image = models.ImageField(upload_to='image', validators=[validate_file_size], blank=False, null=False)
+    title = models.CharField(max_length=250)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.title)
+    
+    class Meta:
+        verbose_name = 'Image'
+        verbose_name_plural = 'Images'

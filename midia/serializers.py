@@ -1,5 +1,5 @@
 from rest_framework import  serializers
-from .models import Document, Video, Audio
+from .models import Document, Video, Audio, Image
 
 
 class DocumentSerializer(serializers.ModelSerializer):
@@ -17,5 +17,10 @@ class VideoSerializer(serializers.ModelSerializer):
 class AudioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Audio
-        fields = ('id', 'user' ,'file', 'name', 'created_at', 'updated_at')
+        fields = ('id', 'user' ,'file', 'title', 'created_at', 'updated_at')
     
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = ('id', 'user' ,'image', 'title', 'created_at', 'updated_at')

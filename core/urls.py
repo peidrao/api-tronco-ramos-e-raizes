@@ -6,9 +6,9 @@ from django.conf.urls.static import static
 
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from midia.views import DocumentViewSet, VideoViewSet, AudioViewSet
+from midia.views import DocumentViewSet, VideoViewSet, AudioViewSet, ImageViewSet
 from user.views import UserViewSet, TokenIsValidViewSet
-from exposure.views import UploadViewSet
+from exposure.views import ExposureViewSet
 
 
 router = routers.DefaultRouter()
@@ -16,8 +16,9 @@ router = routers.DefaultRouter()
 router.register(r'api/v1/documents', DocumentViewSet, basename='document')
 router.register(r'api/v1/videos', VideoViewSet, basename='video')
 router.register(r'api/v1/audios', AudioViewSet, basename='audio')
+router.register(r'api/v1/images', ImageViewSet, basename='image')
 router.register(r'api/v1/users', UserViewSet, basename='users')
-router.register(r'api/v1/exposures', UploadViewSet, basename='exposure')
+router.register(r'api/v1/exposures', ExposureViewSet, basename='exposure')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
