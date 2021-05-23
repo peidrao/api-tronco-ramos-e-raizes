@@ -33,9 +33,9 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
 
-    'midia',
     'user',
-    'exposure'
+    'exposure',
+    'midia',
 
 ]
 

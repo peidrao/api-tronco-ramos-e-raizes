@@ -1,22 +1,7 @@
-import admin_thumbnails
+from exposure.models import Exposure
 from django.contrib import admin
 
-from .models import *
+# Register your models here.
+admin.site.register(Exposure)
 
-class AlbumImageAdmin(admin.StackedInline):
-    model = AlbumImage
- 
-@admin.register(Image)
-class ImageAdmin(admin.ModelAdmin):
-    inlines = [AlbumImageAdmin]
- 
-    class Meta:
-       model = Image
- 
-@admin.register(AlbumImage)
-class AlbumImageAdmin(admin.ModelAdmin):
-    pass
 
-@admin.register(Exposure)
-class Exposure(admin.ModelAdmin):
-    pass

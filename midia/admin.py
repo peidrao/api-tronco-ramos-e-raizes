@@ -1,40 +1,52 @@
 from django.contrib import admin
-from .models import Document, Image, Video, Audio
-
+from .models import *
+admin.site.register(Tag)
 
 class DocumentAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     list_display = ['__str__', 'created_at', 'updated_at']
 
-    class Meta:
-        model = Document
 
 
-class VideoAdmin(admin.ModelAdmin):
+class VideoInline(admin.TabularInline):
+    model = Video
+    readonly_fields = ('id',)
+    extra = 1
+
+class AlbumVideoAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'created_at', 'updated_at']
+    inlines = [VideoInline]
+    
 
-    class Meta:
-        model = Video
+class AudioInline(admin.TabularInline):
+    model = Audio
+    readonly_fields = ('id',)
+    extra = 1
 
 
-class AudioAdmin(admin.ModelAdmin):
+class AlbumAudioAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     list_display = ['__str__', 'created_at', 'updated_at']
+    inlines= [AudioInline]
 
-    class Meta:
-        model = Audio
+class ImageInline(admin.TabularInline):
+    model = Image
+    readonly_fields = ('id',)
+    extra = 1
+
+class AlbumImageAdmin(admin.ModelAdmin):
+    fields = ("title",)
+    inlines = [ImageInline]
 
 
-
-class ImageAdmin(admin.ModelAdmin):
-    date_hierarchy = 'created_at'
-    list_display = ['__str__', 'created_at', 'updated_at']
-
-    class Meta:
-        model = Image
-
+admin.site.register(AlbumImage, AlbumImageAdmin)
+admin.site.register(Image)
 
 admin.site.register(Document, DocumentAdmin)
-admin.site.register(Video, VideoAdmin)
-admin.site.register(Audio, AudioAdmin)
-#admin.site.register(Image, ImageAdmin)
+
+admin.site.register(AlbumAudio, AlbumAudioAdmin)
+admin.site.register(Audio)
+
+admin.site.register(AlbumVideo, AlbumVideoAdmin)
+admin.site.register(Video)
+ 

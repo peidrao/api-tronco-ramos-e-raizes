@@ -1,41 +1,21 @@
-from django.db.models.fields.files import ImageField
-from user.models import User
 from django.db import models
 
-from model_abs import ModelAbs
 from .validators import validate_file_size
-# Create your models here.
 
-class Video(ModelAbs):
-    title = models.CharField(max_length=100, unique=True)
-    link_video = models.CharField(max_length=250, unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.title)
-
-    class Meta:
-        verbose_name = 'Vídeo'
-        verbose_name_plural = 'Vídeos'
-
-
-class Audio(ModelAbs):
-    file = models.FileField(upload_to='audios', validators=[validate_file_size], blank=False, null=False)
-    title = models.CharField(max_length=250, unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class Tag(models.Model):
+    title = models.CharField(max_length=50)
+    color = models.CharField(max_length=50)
 
     def __str__(self):
         return self.title
-    
-    class Meta:
-        verbose_name = 'Áudio'
-        verbose_name_plural = 'Áudios'
 
-
-class Document(ModelAbs):
+class Document(models.Model):
     file = models.FileField(upload_to='documents', validators=[validate_file_size], blank=False, null=False)
     title = models.CharField(max_length=250)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+   # user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.title)
@@ -45,14 +25,70 @@ class Document(ModelAbs):
         verbose_name_plural = 'Documentos'
 
 
-class Image(ModelAbs):
-    image = models.ImageField(upload_to='image', validators=[validate_file_size], blank=False, null=False)
+class AlbumAudio(models.Model):
     title = models.CharField(max_length=250)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+      
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.title)
-    
-    class Meta:
-        verbose_name = 'Image'
-        verbose_name_plural = 'Images'
+
+class Audio(models.Model):
+    audios = models.ForeignKey(AlbumAudio, default=None, on_delete=models.CASCADE)
+    file = models.FileField(upload_to='audios', validators=[validate_file_size], blank=False, null=False)
+    title = models.CharField(max_length=250)
+    tags = models.ForeignKey(Tag, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+
+class AlbumVideo(models.Model):
+    title = models.CharField(max_length=250)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.title)
+
+
+class Video(models.Model):
+    video = models.ForeignKey(AlbumVideo, default=None, on_delete=models.CASCADE)
+    link_video = models.CharField(max_length=200)
+
+    title = models.CharField(max_length=250)
+    tags = models.ForeignKey(Tag, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+
+class AlbumImage(models.Model):
+    title = models.CharField(max_length=250)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.title)
+
+class Image(models.Model):
+    image = models.ForeignKey(AlbumImage, default=None, on_delete=models.CASCADE)
+    image_album = models.FileField(upload_to = 'album_images/')
+
+    title = models.CharField(max_length=250)
+    tags = models.ForeignKey(Tag, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title 

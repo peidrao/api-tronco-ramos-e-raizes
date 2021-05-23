@@ -1,35 +1,5 @@
-from midia.models import Audio, Document, Image, Video
-from user.models import User
-from model_abs import ModelAbs
 from django.db import models
-
-
-class Tag(models.Model):
-    title = models.CharField(max_length=50)
-    color = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.title
-
-
-class AlbumAbs(models.Model):
-    class Meta:
-        abstract = True
-
-
-    title = models.CharField(max_length=250)
-    tags = models.ForeignKey(Tag, on_delete=models.CASCADE)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-
-
-class AlbumImage(AlbumAbs):
-    album = models.ForeignKey(Image, default=None, on_delete=models.CASCADE)
-    images = models.FileField(upload_to = 'images/')
- 
- 
+from midia.models import AlbumAudio, AlbumImage, AlbumVideo, Tag
 
 class Exposure(models.Model):
     title = models.CharField(max_length=200)
@@ -37,8 +7,12 @@ class Exposure(models.Model):
     content = models.CharField(max_length=200)
     tags = models.ForeignKey(Tag, on_delete=models.CASCADE)
     album_image = models.OneToOneField(AlbumImage, on_delete=models.CASCADE)
-    
+    album_video = models.OneToOneField(AlbumVideo, on_delete=models.CASCADE)
+    album_audio = models.OneToOneField(AlbumAudio, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    
+    def __str__(self):
+        return self.title
+
+
