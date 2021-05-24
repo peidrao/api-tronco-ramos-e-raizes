@@ -1,5 +1,6 @@
 
 from django.db import models
+from django.utils.safestring import mark_safe
 from user.models import User
 
 
@@ -9,6 +10,10 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.title
+
+    def color_tag(self):
+        if self.color:
+            return mark_safe('<p style="color:blue;"> Tag </p>').format(self.color)
 
 
 class ModelAbs(models.Model):

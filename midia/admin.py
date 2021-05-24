@@ -1,8 +1,10 @@
+from django.contrib.auth.models import Group
 from django.contrib import admin
 from .models import *
 from .models_abs import Tag
 
-admin.site.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'color_tag']
 
 class DocumentAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
@@ -43,10 +45,12 @@ admin.site.register(AlbumImage, AlbumImageAdmin)
 admin.site.register(Image)
 
 admin.site.register(Document, DocumentAdmin)
+admin.site.register(Tag, TagAdmin)
 
 admin.site.register(AlbumAudio, AlbumAudioAdmin)
 admin.site.register(Audio)
 
 admin.site.register(AlbumVideo, AlbumVideoAdmin)
 admin.site.register(Video)
- 
+
+admin.site.unregister(Group)
