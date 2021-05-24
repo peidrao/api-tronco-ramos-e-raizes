@@ -3,7 +3,7 @@ from .models import *
 from .models_abs import Tag
 
 
-class TagSerializer(serializers.Serializer):
+class TagSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Tag
-        fields = ("title", "color")
+        fields = "__all__"
