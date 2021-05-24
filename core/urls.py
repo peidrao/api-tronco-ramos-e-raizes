@@ -14,16 +14,13 @@ from exposure.views import *
 router = routers.DefaultRouter()
 
 router.register(r'api/v1/tags', TagViewSet, basename='tag')
-
-""" router.register(r'api/v1/documents', DocumentViewSet, basename='document')
-router.register(r'api/v1/videos', VideoViewSet, basename='video')
-# router.register(r'api/v1/audios', AudioViewSet, basename='audio')
-router.register(r'api/v1/images', ImageViewSet, basename='image')
-router.register(r'api/v1/users', UserViewSet, basename='users')
-# router.register(r'api/v1/album_images', AlbumImageViewSet, basename='album_images')
-#router.register(r'api/v1/album_videos', AlbumVideoViewSet, basename='album_videos')
- """
-
+router.register(r'api/v1/documents', DocumentViewSet, basename='document')
+router.register(r'api/v1/album_audios', AlbumAudioViewSet, basename='album_audio')
+router.register(r'api/v1/audios', AudioViewSet, basename='audio')
+router.register(r'api/v1/album_videos', AlbumVideoViewSet, basename='album_video')
+router.register(r'api/v1/videos', AudioViewSet, basename='video')
+router.register(r'api/v1/album_imagess', AlbumImageViewSet, basename='album_images')
+router.register(r'api/v1/images',  ImageViewSet, basename='image')
 router.register(r'api/v1/exposures', ExposureViewSet, basename='exposure')
 
 urlpatterns = [
