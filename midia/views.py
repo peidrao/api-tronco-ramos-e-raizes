@@ -1,8 +1,8 @@
-from django.db.models import query
 from rest_framework import viewsets
 from .models_abs import Tag
 from .serializers import *
 from .models import *
+
 
 class TagViewSet(viewsets.ModelViewSet):
     serializer_class = TagSerializer

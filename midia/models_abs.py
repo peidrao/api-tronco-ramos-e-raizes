@@ -1,6 +1,8 @@
 
 from django.db import models
-from django.utils.safestring import mark_safe
+from django.utils import safestring
+#from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 from user.models import User
 
 
@@ -13,7 +15,8 @@ class Tag(models.Model):
 
     def color_tag(self):
         if self.color:
-            return mark_safe('<p style="color:blue;"> Tag </p>').format(self.color)
+            return format_html('<p style="color: {}"`> Tag </p>', self.color)
+        
 
 
 class ModelAbs(models.Model):

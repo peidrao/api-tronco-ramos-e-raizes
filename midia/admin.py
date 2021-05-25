@@ -1,3 +1,5 @@
+from django import forms
+from url_parser import parse_url
 from django.contrib.auth.models import Group
 from django.contrib import admin
 from .models import *
@@ -15,10 +17,34 @@ class VideoInline(admin.TabularInline):
     readonly_fields = ('id',)
     extra = 1
 
+class VideoForm(forms.ModelForm):
+    class Meta: 
+        model = AlbumVideo
+        fields = "__all__"
+        
+    def clean_video_album(self):
+        link_video = parse_url(self.clean_data['video_album'])
+        print(link_video)
+        print('asdasdasd')
+        return self.cleaned_data['video_album']
+
 class AlbumVideoAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'created_at', 'updated_at']
     inlines = [VideoInline]
     
+    
+
+
+
+
+"""    
+def perform_create(self, serializer):
+    link_video = parse_url(serializer.validated_data.get('link_video'))
+    title = serializer.validated_data.get('title')
+    link_video_id= link_video['query']['v']
+    serializer.save(title=title, link_video=link_video_id) 
+"""
+        
 
 class AudioInline(admin.TabularInline):
     model = Audio
