@@ -1,9 +1,10 @@
 from django.db import models
-from .validators import validate_file_size
+from .validators import validate_file_size, UploadToPath
 from .models_abs import AlbumAbs, ModelAbs
 
+
 class Document(ModelAbs):
-    file = models.FileField(upload_to='documents', validators=[validate_file_size], blank=False, null=False)
+    file = models.FileField(upload_to=UploadToPath('documents'), validators=[validate_file_size], blank=False, null=False)
     
     def __str__(self):
         return str(self.title)
@@ -29,7 +30,7 @@ class AlbumImage(ModelAbs):
 
 class Audio(AlbumAbs):
     audios = models.ForeignKey(AlbumAudio, default=None, on_delete=models.CASCADE)
-    audio_album = models.FileField(upload_to='audios', validators=[validate_file_size], blank=False, null=False)
+    audio_album = models.FileField(upload_to=UploadToPath('audios'), validators=[validate_file_size], blank=False, null=False)
     
     def __str__(self):
         return self.title
@@ -44,7 +45,6 @@ class Video(AlbumAbs):
 
 class Image(AlbumAbs):
     images = models.ForeignKey(AlbumImage, default=None, on_delete=models.CASCADE)
-    image_album = models.FileField(upload_to = 'album_images/')
-
+    image_album = models.FileField(upload_to=UploadToPath('images'))
     def __str__(self):
         return self.title 

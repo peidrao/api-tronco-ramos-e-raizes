@@ -35,8 +35,6 @@ class AlbumVideoAdmin(admin.ModelAdmin):
     
 
 
-
-
 """    
 def perform_create(self, serializer):
     link_video = parse_url(serializer.validated_data.get('link_video'))

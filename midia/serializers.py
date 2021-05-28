@@ -18,6 +18,8 @@ class AlbumAudioSerializer(serializers.ModelSerializer):
     class Meta: 
         model = AlbumAudio
         fields = "__all__"
+    
+
 
 class AudioSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,11 +42,21 @@ class AlbumImageSerializer(serializers.ModelSerializer):
     class Meta: 
         model = AlbumImage
         fields = "__all__"
-
+    
+    
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         fields = "__all__"
+
+
+
+
+    
+
+
+    
+   
 
 
 
