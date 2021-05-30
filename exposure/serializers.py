@@ -1,8 +1,13 @@
-from midia.models import AlbumAudio
+from user.models import User
 from exposure.models import Exposure
 from rest_framework import serializers
-from midia.serializers import AlbumImageSerializer, AlbumVideoSerializer, AlbumAudioSerializer
+from midia.serializers import AlbumImageSerializer, AlbumVideoSerializer, AlbumAudioSerializer, TagSerializer
 
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "name", "username", "email"]
 
 class ExposureSerializer(serializers.ModelSerializer):
 
@@ -15,4 +20,6 @@ class ExposureSerializer(serializers.ModelSerializer):
         self.fields['album_image'] = AlbumImageSerializer(read_only=True, many=False)
         self.fields['album_audio'] = AlbumAudioSerializer(read_only=True, many=False)
         self.fields['album_video'] = AlbumVideoSerializer(read_only=True, many=False)
+        self.fields['users'] = UserSerializer(read_only=True, many=True)
+        self.fields['tags'] = TagSerializer(read_only=True, many=True)
         return super().to_representation(instance)

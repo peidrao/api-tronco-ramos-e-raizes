@@ -17,7 +17,10 @@ class Tag(models.Model):
         if self.color:
             return format_html('<p style="color: {}"`> Tag </p>', self.color)
         
-
+IS_PUBLIC = (
+    ("ARQUIVAR", "Arquivar"),
+    ("PUBLICAR", "Publicar"),
+)
 
 class ModelAbs(models.Model):
     
@@ -26,6 +29,7 @@ class ModelAbs(models.Model):
 
     title = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_public = models.CharField(max_length=20, choices=IS_PUBLIC, default="Arquivar")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

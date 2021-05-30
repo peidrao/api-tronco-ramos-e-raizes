@@ -3,6 +3,7 @@ from .validators import validate_file_size, UploadToPath
 from .models_abs import AlbumAbs, ModelAbs
 
 
+
 class Document(ModelAbs):
     file = models.FileField(upload_to=UploadToPath('documents'), validators=[validate_file_size], blank=False, null=False)
     
@@ -46,5 +47,6 @@ class Video(AlbumAbs):
 class Image(AlbumAbs):
     images = models.ForeignKey(AlbumImage, default=None, on_delete=models.CASCADE)
     image_album = models.FileField(upload_to=UploadToPath('images'))
+    
     def __str__(self):
         return self.title 
