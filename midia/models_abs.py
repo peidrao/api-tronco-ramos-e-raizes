@@ -41,6 +41,7 @@ class AlbumAbs(models.Model):
 
     title = models.CharField(max_length=250)
     tags = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    author = models.CharField(max_length=100)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

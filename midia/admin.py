@@ -17,32 +17,29 @@ class VideoInline(admin.TabularInline):
     readonly_fields = ('id',)
     extra = 1
 
-class VideoForm(forms.ModelForm):
+
+class AlbumVideoAdmin(admin.ModelAdmin):
+    model = AlbumVideo
+    inlines = [VideoInline]
+
+""" class VideoForm(forms.ModelForm):
     class Meta: 
         model = AlbumVideo
         fields = "__all__"
         
-    def clean_video_album(self):
+def clean_video_album(self):
         link_video = parse_url(self.clean_data['video_album'])
         print(link_video)
         print('asdasdasd')
         return self.cleaned_data['video_album']
 
-class AlbumVideoAdmin(admin.ModelAdmin):
-    list_display = ['__str__', 'created_at', 'updated_at']
-    inlines = [VideoInline]
-    
-    
 
-
-"""    
 def perform_create(self, serializer):
     link_video = parse_url(serializer.validated_data.get('link_video'))
     title = serializer.validated_data.get('title')
     link_video_id= link_video['query']['v']
     serializer.save(title=title, link_video=link_video_id) 
-"""
-        
+ """
 
 class AudioInline(admin.TabularInline):
     model = Audio
@@ -55,14 +52,17 @@ class AlbumAudioAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'created_at', 'updated_at']
     inlines= [AudioInline]
 
-class ImageInline(admin.TabularInline):
+
+
+
+class AlbumImageInline(admin.TabularInline):
     model = Image
     readonly_fields = ('id',)
-    extra = 1
+ 
 
 class AlbumImageAdmin(admin.ModelAdmin):
-    list_display = ['__str__', 'created_at', 'updated_at']
-    inlines = [ImageInline]
+    list_display = ['__str__']
+    inlines = [AlbumImageInline]
 
 
 admin.site.register(AlbumImage, AlbumImageAdmin)

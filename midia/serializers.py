@@ -4,7 +4,7 @@ from .models_abs import Tag
 
 
 class TagSerializer(serializers.ModelSerializer):
-    class Meta: 
+    class Meta:
         model = Tag
         fields = "__all__"
 
@@ -14,49 +14,59 @@ class DocumentSerializer(serializers.ModelSerializer):
         model = Document
         fields = "__all__"
 
-class AlbumAudioSerializer(serializers.ModelSerializer):
-    class Meta: 
-        model = AlbumAudio
-        fields = "__all__"
-    
-
 
 class AudioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Audio
         fields = "__all__"
+    
+    def to_representation(self, instance):
+        self.fields['tags'] = TagSerializer(read_only=True, many=False)
+        return super().to_representation(instance)
+
+class AlbumAudioSerializer(serializers.ModelSerializer):
+     audios = AudioSerializer(many=True, read_only=True)
+     
+     class Meta:
+        model = AlbumAudio
+        fields = ("id", "title", "user", "audios")
+
+class VideoSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+    
+
+    class Meta:
+        model = Video
+        fields = ("id", "album", 'user', 'video_url', 'tags')
+
+    def to_representation(self, instance):
+        self.fields['tags'] = TagSerializer(read_only=True, many=False)
+        return super().to_representation(instance)
 
 
 class AlbumVideoSerializer(serializers.ModelSerializer):
-    class Meta: 
-        model = AlbumVideo
-        fields = "__all__"
-
-class VideoSerializer(serializers.ModelSerializer):
+    videos = VideoSerializer(many=True, read_only=True)
     class Meta:
-        model = Video
-        fields = "__all__"
+        model = AlbumVideo
+        fields = ("id", 'title', 'user', 'videos')
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+
+    class Meta:
+        model = Image
+        fields = ("id", "album", "user", "title", "author", "image", 'tags')
+    
+    def to_representation(self, instance):
+        self.fields['tags'] = TagSerializer(read_only=True, many=False)
+        return super().to_representation(instance)
 
 
 class AlbumImageSerializer(serializers.ModelSerializer):
-    class Meta: 
-        model = AlbumImage
-        fields = "__all__"
-    
-    
-class ImageSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+    images = ImageSerializer(many=True, read_only=True)
+
     class Meta:
-        model = Image
-        fields = "__all__"
-
-
-
-
-    
-
-
-    
-   
-
-
-
+        model = AlbumImage
+        fields = ("id", 'title', 'user', 'images')

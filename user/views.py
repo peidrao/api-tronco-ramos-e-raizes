@@ -5,12 +5,11 @@ from django.contrib.auth import get_user_model
 from rest_framework import viewsets, views, exceptions
 from rest_framework import status 
 from rest_framework.response import Response
-from rest_framework_jwt.serializers import User
-
+from  .models import User
 from .serializers import UserSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = get_user_model().objects.all()
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
     def create(self, request, *args, **kwargs):

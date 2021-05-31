@@ -1,9 +1,13 @@
+from midia.serializers import AlbumImageSerializer, ImageSerializer
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
+from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
+    album_image = AlbumImageSerializer(many=True, read_only=True)
+    images = ImageSerializer(many=True, read_only=True)
+
     class Meta:
-        model = get_user_model()
+        model = User
         fields = (
             "id", 
             "username",
@@ -15,5 +19,8 @@ class UserSerializer(serializers.ModelSerializer):
             #"created_at", 
             #"updated_at",
             #"user_permissions",
-            "password"
+            'album_image',
+            'images',
+            'password'
             )
+    
