@@ -18,6 +18,20 @@ class AlbumAudio(ModelAbs):
     def __str__(self):
         return self.title
 
+class AlbumVideo(ModelAbs):
+    
+
+    def __str__(self):
+        return str(self.title)      
+
+
+class AlbumImage(models.Model):
+    title = models.CharField(max_length=100)
+    user = models.ForeignKey(User, related_name='albums', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title  
+
 class Audio(AlbumAbs):
     album = models.ForeignKey(AlbumAudio, related_name='audios', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='audios', on_delete=models.CASCADE)
@@ -26,23 +40,10 @@ class Audio(AlbumAbs):
     def __str__(self):
         return self.title
 
-
-class AlbumVideo(ModelAbs):
-    def __str__(self):
-        return str(self.title)
-
-
 class Video(AlbumAbs):
     album = models.ForeignKey(AlbumVideo, related_name='videos', default=None, on_delete=models.CASCADE)
     video_url = models.CharField(max_length=200)
     user = models.ForeignKey(User, related_name='videos', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.title
-
-class AlbumImage(models.Model):
-    title = models.CharField(max_length=100)
-    user = models.ForeignKey(User, related_name='albums', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
