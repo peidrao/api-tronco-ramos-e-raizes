@@ -5,7 +5,7 @@ import datetime
 import os
 import unicodedata
 
-from django.core.files.storage import default_storage
+
 from django.utils.deconstruct import deconstructible
 from django.utils.encoding import force_text, force_str
 

@@ -21,6 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
             #"user_permissions",
             'album_image',
             'images',
+            'image_profile',
             'password'
             )
     

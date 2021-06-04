@@ -1,10 +1,11 @@
 from django.db import models
 from .validators import validate_file_size, UploadToPath
-from .models_abs import AlbumAbs, ModelAbs
+from .models_abs import AlbumAbs, ModelAbs, Tag
 from user.models import User
 from url_parser import parse_url
 class Document(ModelAbs):
     file = models.FileField(upload_to=UploadToPath('documents'), validators=[validate_file_size], blank=False, null=False)
+    tags = models.ManyToManyField(Tag)
     
     def __str__(self):
         return str(self.title)
@@ -25,17 +26,24 @@ class AlbumVideo(ModelAbs):
         return str(self.title)      
 
 
-class AlbumImage(models.Model):
-    title = models.CharField(max_length=100)
-    user = models.ForeignKey(User, related_name='albums', on_delete=models.CASCADE)
+# class AlbumImage(models.Model):
+#     title = models.CharField(max_length=100)
+#     user = models.ForeignKey(User, related_name='albums', on_delete=models.CASCADE)
+
+#     def __str__(self):
+#         return self.title  
+
+
+class AlbumImage(ModelAbs):
 
     def __str__(self):
         return self.title  
 
+
 class Audio(AlbumAbs):
     album = models.ForeignKey(AlbumAudio, related_name='audios', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='audios', on_delete=models.CASCADE)
-    audio = models.FileField(upload_to=UploadToPath('audios'),  validators=[validate_file_size],)
+    audio = models.FileField(upload_to=UploadToPath('audios'),  validators=[validate_file_size])
     
     def __str__(self):
         return self.title
@@ -53,7 +61,6 @@ class Video(AlbumAbs):
         link_video = parse_url(self.video_url)
         self.video_url = link_video['query']['v']
         return super(Video, self).save(*args, **kwargs)
-
 
 
 class Image(AlbumAbs):

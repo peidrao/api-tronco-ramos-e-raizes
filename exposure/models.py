@@ -1,3 +1,4 @@
+from midia.validators import UploadToPath
 from user.models import User
 from django.db import models
 from django.db.models.base import Model
@@ -27,6 +28,8 @@ class Exposure(models.Model):
         AlbumVideo, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Álbum de video')
     album_audio = models.OneToOneField(
         AlbumAudio, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Álbum de áudio')
+    
+    thumbnail = models.ImageField(upload_to=UploadToPath('thumbail_exposure'))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

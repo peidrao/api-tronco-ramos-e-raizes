@@ -7,45 +7,53 @@ class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = "__all__"
-
+    
 
 class DocumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Document
         fields = "__all__"
 
+    def to_representation(self, instance):
+        self.fields['tags'] = TagSerializer(read_only=True, many=True)
+        return super().to_representation(instance)
+
+
 
 class AudioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Audio
         fields = "__all__"
-    
+
     def to_representation(self, instance):
-        self.fields['tags'] = TagSerializer(read_only=True, many=False)
+        self.fields['tags'] = TagSerializer(read_only=True, many=True)
         return super().to_representation(instance)
 
+
 class AlbumAudioSerializer(serializers.ModelSerializer):
-     audios = AudioSerializer(many=True, read_only=True)
-     
-     class Meta:
+    audios = AudioSerializer(many=True, read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
+
+    class Meta:
         model = AlbumAudio
-        fields = ("id", "title", "user", "audios")
+        fields = ("id", "title", "user", "audios", 'tags')
+
 
 class VideoSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
-    
 
     class Meta:
         model = Video
         fields = ("id", "album", 'user', 'video_url', 'tags')
 
     def to_representation(self, instance):
-        self.fields['tags'] = TagSerializer(read_only=True, many=False)
+        self.fields['tags'] = TagSerializer(read_only=True, many=True)
         return super().to_representation(instance)
 
 
 class AlbumVideoSerializer(serializers.ModelSerializer):
     videos = VideoSerializer(many=True, read_only=True)
+
     class Meta:
         model = AlbumVideo
         fields = ("id", 'title', 'user', 'videos')
@@ -57,9 +65,9 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         fields = ("id", "album", "user", "title", "author", "image", 'tags')
-    
+
     def to_representation(self, instance):
-        self.fields['tags'] = TagSerializer(read_only=True, many=False)
+        self.fields['tags'] = TagSerializer(read_only=True, many=True)
         return super().to_representation(instance)
 
 
