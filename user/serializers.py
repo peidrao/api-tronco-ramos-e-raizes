@@ -2,6 +2,7 @@ from midia.serializers import AlbumImageSerializer, ImageSerializer
 from rest_framework import serializers
 from .models import User
 
+
 class UserSerializer(serializers.ModelSerializer):
     album_image = AlbumImageSerializer(many=True, read_only=True)
     images = ImageSerializer(many=True, read_only=True)
@@ -9,19 +10,17 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            "id", 
+            "id",
             "username",
-            "name", 
+            "name",
+            'image_profile',
             "email",
             "is_staff",
             "is_active",
             "is_superuser",
-            #"created_at", 
-            #"updated_at",
-            #"user_permissions",
+            'updated_at',
+            'password',
+            # "user_permissions",
             'album_image',
-            'images',
-            'image_profile',
-            'password'
-            )
-    
+            'images'
+        )

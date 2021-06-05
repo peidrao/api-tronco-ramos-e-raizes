@@ -7,8 +7,8 @@ from user.models import User
 
 
 class Tag(models.Model):
-    title = models.CharField(max_length=50)
-    color = models.CharField(max_length=50)
+    title = models.CharField("Título da tag", max_length=50)
+    color = models.CharField("Cor da tag", max_length=50)
 
     def __str__(self):
         return self.title
@@ -18,22 +18,20 @@ class Tag(models.Model):
             return format_html('<p style="color: {}"`> Tag </p>', self.color)
 
 
-IS_PUBLIC = (
-    ("ARQUIVAR", "Arquivar"),
-    ("PUBLICAR", "Publicar"),
-)
-
-
 class ModelAbs(models.Model):
+    IS_PUBLIC = (
+        ("ARQUIVAR", "Arquivar"),
+        ("PUBLICAR", "Publicar"),
+    )
 
     class Meta:
         abstract = True
 
-    title = models.CharField(max_length=100, verbose_name='Título')
+    title = models.CharField('Título', max_length=100)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name='Usuário')
-    is_public = models.CharField(max_length=20, choices=IS_PUBLIC,
-                                 default="Arquivar", verbose_name='Status de publicação')
+    is_public = models.CharField('Status de publicação', max_length=20, choices=IS_PUBLIC,
+                                 default="Arquivar")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -43,14 +41,14 @@ class AlbumAbs(models.Model):
     class Meta:
         abstract = True
 
-    title = models.CharField(verbose_name='Título do álbum', max_length=250)
-    description = models.CharField(max_length=250)
+    title = models.CharField('Título do álbum', max_length=250)
+    description = models.CharField('Descrição', max_length=250)
     tags = models.ManyToManyField(
         Tag, verbose_name='Tags do álbum')
-    author = models.CharField(max_length=100, verbose_name='Autor do álbum')
+    author = models.CharField('Autor do álbum', max_length=100)
 
-    lat = models.CharField(verbose_name='Latitude', max_length=50)
-    long = models.CharField(verbose_name='Longitude', max_length=50)
+    lat = models.CharField('Latitude', max_length=50)
+    long = models.CharField('Longitude', max_length=50)
     views = models.PositiveBigIntegerField(default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
