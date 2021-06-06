@@ -10,6 +10,8 @@ from midia.views import *
 from user.views import UserViewSet, TokenIsValidViewSet
 from exposure.views import *
 
+admin.autodiscover()
+admin.site.enable_nav_sidebar = False
 
 router = routers.DefaultRouter()
 
