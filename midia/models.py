@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 from .validators import validate_file_size, UploadToPath
 from .models_abs import AlbumAbs, ModelAbs, Tag
 from user.models import User
@@ -71,3 +72,10 @@ class Image(AlbumAbs):
 
     def __str__(self):
         return self.title
+
+
+    def image_url(self):
+        if not self.image:
+            return ""
+        else:
+            return mark_safe('<img src="{}" width="50px" height="50px" />'.format(self.image.url))

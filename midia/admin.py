@@ -20,6 +20,7 @@ class VideoInline(admin.TabularInline):
 
 class AlbumVideoAdmin(admin.ModelAdmin):
     model = AlbumVideo
+    
     inlines = [VideoInline]
 
 class AudioInline(admin.TabularInline):
@@ -42,12 +43,19 @@ class AlbumImageInline(admin.TabularInline):
  
 
 class AlbumImageAdmin(admin.ModelAdmin):
-    list_display = ['__str__']
+    list_display = ['__str__', 'is_public', 'user']
     inlines = [AlbumImageInline]
 
 
+class ImageAdmin(admin.ModelAdmin):
+    model = Image
+    list_display = ['title', 'author', 'image_url']
+
+
+
+
 admin.site.register(AlbumImage, AlbumImageAdmin)
-admin.site.register(Image)
+admin.site.register(Image, ImageAdmin)
 
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(Tag, TagAdmin)
