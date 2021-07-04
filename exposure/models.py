@@ -1,7 +1,6 @@
 from midia.validators import UploadToPath
 from user.models import User
 from django.db import models
-from django.db.models.base import Model
 from midia.models import AlbumAudio, AlbumImage, AlbumVideo
 from midia.models_abs import Tag
 
