@@ -14,22 +14,25 @@ class DocumentAdmin(admin.ModelAdmin):
 
 class VideoInline(admin.TabularInline):
     model = Video
+    fields = ("title", "description", "tags",  "video_url", "author", "lat", "long", "user",)
     readonly_fields = ('id',)
     extra = 1
 
 
 class AlbumVideoAdmin(admin.ModelAdmin):
     model = AlbumVideo
-    
+    fields = ("title", "is_public", "user")
     inlines = [VideoInline]
 
 class AudioInline(admin.TabularInline):
     model = Audio
+    fields = ("title", "description", "tags",  "audio", "author", "lat", "long", "user",)
     readonly_fields = ('id',)
     extra = 1
 
 
 class AlbumAudioAdmin(admin.ModelAdmin):
+
     date_hierarchy = 'created_at'
     list_display = ['__str__', 'created_at', 'updated_at']
     inlines= [AudioInline]
@@ -39,6 +42,7 @@ class AlbumAudioAdmin(admin.ModelAdmin):
 
 class AlbumImageInline(admin.TabularInline):
     model = Image
+    fields = ("title", "description", "tags",  "image", "author", "lat", "long", "user",)
     readonly_fields = ('id',)
  
 
@@ -49,6 +53,7 @@ class AlbumImageAdmin(admin.ModelAdmin):
 
 class ImageAdmin(admin.ModelAdmin):
     model = Image
+    
     list_display = ['title', 'author', 'image_url']
 
 
