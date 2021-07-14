@@ -18,19 +18,19 @@ class Exposure(models.Model):
     content = models.CharField(
         verbose_name='Descrição exposição', max_length=200)
     tags = models.ManyToManyField(Tag)
-    is_public = models.CharField(
+    isPublic = models.CharField(
         max_length=20, choices=IS_PUBLIC, default="Arquivar", verbose_name='Status de publicação')
     users = models.ManyToManyField(User, verbose_name='Usuários')
-    album_image = models.OneToOneField(
+    albumImage = models.OneToOneField(
         AlbumImage, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Álbum de imagem')
-    album_video = models.OneToOneField(
+    albumVideo = models.OneToOneField(
         AlbumVideo, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Álbum de video')
-    album_audio = models.OneToOneField(
+    albumAudio = models.OneToOneField(
         AlbumAudio, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Álbum de áudio')
     
     thumbnail = models.ImageField(upload_to=UploadToPath('thumbail_exposure'))
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updatedAt = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title

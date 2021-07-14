@@ -17,9 +17,9 @@ class ExposureSerializer(serializers.ModelSerializer):
 
     
     def to_representation(self, instance):
-        self.fields['album_image'] = AlbumImageSerializer(read_only=True, many=False)
-        self.fields['album_audio'] = AlbumAudioSerializer(read_only=True, many=False)
-        self.fields['album_video'] = AlbumVideoSerializer(read_only=True, many=False)
+        self.fields['albumImage'] = AlbumImageSerializer(read_only=True, many=False)
+        self.fields['albumAudio'] = AlbumAudioSerializer(read_only=True, many=False)
+        self.fields['albumVideo'] = AlbumVideoSerializer(read_only=True, many=False)
         self.fields['users'] = UserSerializer(read_only=True, many=True)
         self.fields['tags'] = TagSerializer(read_only=True, many=True)
         return super().to_representation(instance)

@@ -6,22 +6,22 @@ from .models import *
 from .models_abs import Tag
 
 class TagAdmin(admin.ModelAdmin):
-    list_display = ['__str__', 'color_tag']
+    list_display = ['__str__', 'colorTag']
 
 class DocumentAdmin(admin.ModelAdmin):
-    date_hierarchy = 'created_at'
-    list_display = ['__str__', 'created_at', 'updated_at']
+    date_hierarchy = 'createdAt'
+    list_display = ['__str__', 'createdAt', 'updatedAt']
 
 class VideoInline(admin.TabularInline):
     model = Video
-    fields = ("title", "description", "tags",  "video_url", "author", "lat", "long", "user",)
+    fields = ("title", "description", "tags",  "videoUrl", "author", "lat", "long", "user",)
     readonly_fields = ('id',)
     extra = 1
 
 
 class AlbumVideoAdmin(admin.ModelAdmin):
     model = AlbumVideo
-    fields = ("title", "is_public", "user")
+    fields = ("title", "isPublic", "user")
     inlines = [VideoInline]
 
 class AudioInline(admin.TabularInline):
@@ -33,8 +33,8 @@ class AudioInline(admin.TabularInline):
 
 class AlbumAudioAdmin(admin.ModelAdmin):
 
-    date_hierarchy = 'created_at'
-    list_display = ['__str__', 'created_at', 'updated_at']
+    date_hierarchy = 'createdAt'
+    list_display = ['__str__', 'createdAt', 'updatedAt']
     inlines= [AudioInline]
 
 
@@ -47,7 +47,7 @@ class AlbumImageInline(admin.TabularInline):
  
 
 class AlbumImageAdmin(admin.ModelAdmin):
-    list_display = ['__str__', 'is_public', 'user']
+    list_display = ['__str__', 'isPublic', 'user']
     inlines = [AlbumImageInline]
 
 

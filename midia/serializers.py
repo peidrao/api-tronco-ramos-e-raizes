@@ -44,7 +44,7 @@ class VideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ("id", "album", 'user', 'video_url', 'tags')
+        fields = ("id", "album", 'user', 'videoUrl', 'tags')
 
     def to_representation(self, instance):
         self.fields['tags'] = TagSerializer(read_only=True, many=True)
