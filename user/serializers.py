@@ -18,9 +18,9 @@ class UserSerializer(serializers.ModelSerializer):
             "is_staff",
             "is_active",
             "is_superuser",
-            'updated_at',
+            'updatedAt',
             'password',
             # "user_permissions",
-            'album_image',
+            'albumImage',
             'images'
         )

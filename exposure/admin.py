@@ -4,8 +4,8 @@ from django.contrib import admin
 class ExposureAdmin(admin.ModelAdmin):
     list_display = ['title']
     search_fields = ('title__startswith',)
-    ordering = ("created_at",)
-    list_filter = ("is_public", )
+    ordering = ("createdAt",)
+    list_filter = ("isPublic", )
 
 # Register your models here.
 admin.site.register(Exposure, ExposureAdmin)

@@ -13,7 +13,7 @@ class Tag(models.Model):
     def __str__(self):
         return self.title
 
-    def color_tag(self):
+    def colorTag(self):
         if self.color:
             return format_html('<p style="color: {}"`> Tag </p>', self.color)
 
@@ -30,11 +30,11 @@ class ModelAbs(models.Model):
     title = models.CharField('Título', max_length=100)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name='Usuário')
-    is_public = models.CharField('Status de publicação', max_length=20, choices=IS_PUBLIC,
+    isPublic = models.CharField('Status de publicação', max_length=20, choices=IS_PUBLIC,
                                  default="Arquivar")
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updatedAt = models.DateTimeField(auto_now=True)
 
 
 class AlbumAbs(models.Model):
@@ -51,5 +51,5 @@ class AlbumAbs(models.Model):
     long = models.CharField('Longitude', max_length=50)
     views = models.PositiveBigIntegerField(default=0)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updatedAt = models.DateTimeField(auto_now=True)

@@ -11,7 +11,7 @@ class User(AbstractUser):
     image_profile = models.ImageField(
         verbose_name="Iamgem de perfil", upload_to=UploadToPath('image_profile_user'))
 
-    updated_at = models.DateTimeField(auto_now=True)
+    updatedAt = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name

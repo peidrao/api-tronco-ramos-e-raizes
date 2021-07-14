@@ -50,7 +50,7 @@ class Audio(AlbumAbs):
 class Video(AlbumAbs):
     album = models.ForeignKey(
         AlbumVideo, related_name='videos', default=None, on_delete=models.CASCADE)
-    video_url = models.CharField(max_length=200)
+    videoUrl = models.CharField(max_length=200)
     user = models.ForeignKey(
         User, related_name='videos', on_delete=models.CASCADE)
 
