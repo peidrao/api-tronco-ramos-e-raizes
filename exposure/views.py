@@ -11,3 +11,7 @@ class ExposureViewSet(viewsets.ModelViewSet):
     serializer_class = ExposureSerializer
     queryset = Exposure.objects.all()
 
+
+
+class GeoViewSet(viewsets.ModelViewSet):
+    

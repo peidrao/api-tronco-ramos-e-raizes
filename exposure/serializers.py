@@ -23,3 +23,9 @@ class ExposureSerializer(serializers.ModelSerializer):
         self.fields['users'] = UserSerializer(read_only=True, many=True)
         self.fields['tags'] = TagSerializer(read_only=True, many=True)
         return super().to_representation(instance)
+
+
+class GeoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = 
