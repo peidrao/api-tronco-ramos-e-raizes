@@ -28,6 +28,10 @@ class Exposure(models.Model):
     albumAudio = models.OneToOneField(
         AlbumAudio, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Álbum de áudio')
     
+    views = models.PositiveIntegerField('Quantidade de visualizações!')
+    lat = models.CharField('Latitude', max_length=50)
+    long = models.CharField('Longitude', max_length=50)
+    
     thumbnail = models.ImageField(upload_to=UploadToPath('thumbail_exposure'))
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)

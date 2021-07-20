@@ -78,3 +78,21 @@ class AlbumImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = AlbumImage
         fields = ("id", 'title', 'user', 'images')
+
+
+
+class AlbumImageGeoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AlbumImage
+        fields = ("id", 'title', 'lat', 'long')
+
+class AlbumVideoGeoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AlbumVideo
+        fields = ("id", 'title', 'lat', 'long')
+
+
+class AlbumAudioGeoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AlbumAudio
+        fields = ("id", 'title', 'lat', 'long')

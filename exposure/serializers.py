@@ -1,3 +1,4 @@
+from django.db.models import fields
 from user.models import User
 from exposure.models import Exposure
 from rest_framework import serializers
@@ -23,3 +24,11 @@ class ExposureSerializer(serializers.ModelSerializer):
         self.fields['users'] = UserSerializer(read_only=True, many=True)
         self.fields['tags'] = TagSerializer(read_only=True, many=True)
         return super().to_representation(instance)
+
+
+class ExposureGeoLocationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Exposure
+        fields = ("id", "title", "lat", "long", ) 
+
