@@ -32,6 +32,10 @@ class ModelAbs(models.Model):
         User, on_delete=models.CASCADE, verbose_name='Usuário')
     isPublic = models.CharField('Status de publicação', max_length=20, choices=IS_PUBLIC,
                                  default="Arquivar")
+    
+    lat = models.CharField('Latitude', max_length=50)
+    long = models.CharField('Longitude', max_length=50)
+    views = models.PositiveBigIntegerField(default=0)
 
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
@@ -47,9 +51,7 @@ class AlbumAbs(models.Model):
         Tag, verbose_name='Tags do álbum')
     author = models.CharField('Autor do álbum', max_length=100)
 
-    lat = models.CharField('Latitude', max_length=50)
-    long = models.CharField('Longitude', max_length=50)
-    views = models.PositiveBigIntegerField(default=0)
+   
 
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
